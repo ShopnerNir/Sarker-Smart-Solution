@@ -570,7 +570,7 @@
     </div>
 
     <footer class="minimal-footer">
-        <span>&copy; © 2026 | Sarker Smart Solution Platform</span>
+        <span>&copy;2026 | Sarker Smart Solution Platform</span>
     </footer>
 </div>
 
@@ -680,7 +680,7 @@
 
     function populateQualitySelectorWithLevels(levels) {
         if (!qualitySelector) return;
-        qualitySelector.innerHTML = '<option value="auto">✨ Auto Resolution</option>';
+        qualitySelector.innerHTML = '<option value="auto">Resolution (Auto)</option>';
         if (!levels || levels.length === 0) { qualitySelector.disabled = true; return; }
         qualitySelector.disabled = false;
         const sortedLevels = [...levels].sort((a,b) => (a.height || 0) - (b.height || 0));
