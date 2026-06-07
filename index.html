@@ -582,10 +582,10 @@
 </div>
 
 <script>
-    const PROXY_URL = "https://tv-proxy.shahinrhss99.workers.dev";
-    const getConfigUrl = () => `${PROXY_URL}?source=playlist&t=${Date.now()}`;
+        // সরাসরি নির্দিষ্ট M3U প্লেলিস্ট লিঙ্ক এবং CORS হ্যান্ডেল করার জন্য প্রক্সি
+    const M3U_URL = "https://go.skym3u.top/qcxe.m3u";
+    const CORS_PROXY = "https://api.allorigins.win/raw?url=";
     
-    let FIXED_PLAYLISTS = [];
     let allChannels = [], activeCategory = "all", currentChannel = null, hls = null, searchQuery = "";
     let currentLoadRetries = 0, MAX_RETRIES = 3, retryTimeout = null;
     let searchDebounceTimeout = null;
@@ -705,7 +705,7 @@
         videoPlayer.volume = 1.0;  
 
         videoPlayer.play().then(() => {
-            console.log("Success: Unmuted playback started successfully.");
+            console.log("Success: Playback started.");
         }).catch((error) => {
             console.warn("Autoplay block protection.", error);
             videoPlayer.muted = true;
@@ -834,20 +834,14 @@
         localStorage.setItem('iptv_recents', JSON.stringify(recentsList));
     }
 
-    async function loadPlaylistConfig() {
+    async function fetchM3uPlaylist() {
         try {
-            const response = await fetch(getConfigUrl());
-            if (!response.ok) throw new Error();
-            const data = await response.json();
-            FIXED_PLAYLISTS = data.sources || [];
-        } catch (error) { FIXED_PLAYLISTS = []; }
-    }
-
-    async function fetchM3uPlaylist(sourceKey) {
-        try {
-            const resp = await fetch(`${PROXY_URL}?source=${sourceKey}`);
+            const resp = await fetch(`${CORS_PROXY}${encodeURIComponent(M3U_URL)}`);
             return resp.ok ? await resp.text() : "";
-        } catch(e) { return ""; }
+        } catch(e) { 
+            console.error("M3U Fetch Error: ", e);
+            return ""; 
+        }
     }
 
     async function parseM3uContent(content) {
@@ -879,15 +873,13 @@
     }
 
     async function loadAllPlaylists() {
-        if (!FIXED_PLAYLISTS.length) return [];
-        const results = await Promise.allSettled(FIXED_PLAYLISTS.map(async (item) => {
-            const content = await fetchM3uPlaylist(item.sourceKey);
-            return content ? await parseM3uContent(content) : [];
-        }));
-        let merged = [];
-        for (const r of results) if (r.status === 'fulfilled') merged.push(...r.value);
+        const content = await fetchM3uPlaylist();
+        if (!content) return [];
+        
+        let merged = await parseM3uContent(content);
         const unique = new Map();
         for (const ch of merged) if (!unique.has(ch.url)) unique.set(ch.url, ch);
+        
         return Array.from(unique.values()).map(ch => ({
             ...ch,
             logo: (ch.logo && ch.logo.startsWith('http')) ? ch.logo : `https://ui-avatars.com/api/?background=1c1f38&color=00f0ff&rounded=true&size=70&bold=true&name=${encodeURIComponent(ch.name.slice(0,2))}`
@@ -999,10 +991,10 @@
     async function initApp() {
         globalLoader.style.display = "flex";
         globalLoader.style.opacity = "1";
-        await loadPlaylistConfig();
+        
         const channels = await loadAllPlaylists();
         if (!channels.length) { 
-            listBar.innerHTML = `<div style="grid-column:1/-1; padding:20px;\">⚠️ কোনো চ্যানেল ডেটা লোড করা যায়নি।</div>`; 
+            listBar.innerHTML = `<div style="grid-column:1/-1; padding:20px; text-align:center; color: var(--accent-secondary);">⚠️ কোনো চ্যানেল ডেটা লোড করা যায়নি। প্লেলিস্ট লিঙ্কটি চেক করুন।</div>`; 
             globalLoader.style.display = "none"; 
             return; 
         }
@@ -1034,6 +1026,7 @@
     });
 
     initApp();
+    
 </script>
 </body>
 </html>
