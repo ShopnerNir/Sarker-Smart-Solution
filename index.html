@@ -584,7 +584,8 @@
 <script>
         // সরাসরি নির্দিষ্ট M3U প্লেলিস্ট লিঙ্ক এবং CORS হ্যান্ডেল করার জন্য প্রক্সি
     const M3U_URL = "https://go.skym3u.top/qcxe.m3u";
-    const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+// অলঅরিজিনস এর বদলে কর্স-এনিহোয়্যার বা অন্য কোনো সচল প্রক্সি ব্যবহার করুন
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
     
     let allChannels = [], activeCategory = "all", currentChannel = null, hls = null, searchQuery = "";
     let currentLoadRetries = 0, MAX_RETRIES = 3, retryTimeout = null;
