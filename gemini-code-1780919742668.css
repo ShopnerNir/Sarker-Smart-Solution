@@ -1,0 +1,15 @@
+#video-player {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* ডাউনলোড ঠেকাতে লং-প্রেস প্রোটেকশন */
+    -webkit-touch-callout: none;
+}
+
+/* সিকিউরিটি লেয়ার: প্লেয়ারের ওপর একটি অদৃশ্য লেয়ার যা ডিরেক্ট সেভ অপশন ব্লক করে */
+.video-protection-shield {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: calc(100% - 50px);
+    z-index: 1;
+    background: transparent;
+}
