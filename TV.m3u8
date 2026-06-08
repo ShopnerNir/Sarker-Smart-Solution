@@ -1,4 +1,7 @@
 #EXTM3U
+#EXTINF:-1 tvg-logo="" group-title="Bangla",Asif Video Fash
+https://github.com/ShopnerNir/Sarker-Smart-Solution/blob/85f509e784179a40f5d3256e500a7b93e3ff062c/asif.m3u8
+
 #EXTINF:-1 tvg-logo="https://tsportscdn.s3.ap-southeast-1.amazonaws.com/uploads/settings/logo.png" group-title="Bangla",T Sports
 https://tvsen7.aynaott.com/tsports-hd/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-logo="https://ssl.com.bd/sites/default/files/BTV%20Logo%20Gallery.png" group-title="Bangla",BTV
