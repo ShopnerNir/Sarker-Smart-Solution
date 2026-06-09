@@ -1,4 +1,11 @@
 [
+
+  {
+    "name": "Zee Bangla",
+    "logo": "https://s3.aynaott.com/storage/897698f593fc07974fc46881a440733d",
+    "group": "Bangla",
+    "url": "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeebangla/default/manifest.mpd"
+  },
   {
     "name": "Ananda TV",
     "logo": "https://s3.aynaott.com/storage/897698f593fc07974fc46881a440733d",
