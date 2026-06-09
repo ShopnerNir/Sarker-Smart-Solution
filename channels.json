@@ -1,11 +1,14 @@
 [
-
-  {
-    "name": "Zee Bangla",
-    "logo": "https://s3.aynaott.com/storage/897698f593fc07974fc46881a440733d",
-    "group": "Bangla",
-    "url": "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeebangla/default/manifest.mpd"
-  },
+{
+      "name": "Zee Bangla HD",
+      "group": "Bangla",
+      "logo": "https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/9XHWylqs.png",
+      "url": "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeebangla/default/manifest.mpd",
+      "drm": {
+        "type": "clearkey",
+        "key": "1df83e058b864da896c9288eef63b113:fc32f26239054b56aab48225305598fe"
+      }
+    },
   {
     "name": "Ananda TV",
     "logo": "https://s3.aynaott.com/storage/897698f593fc07974fc46881a440733d",
